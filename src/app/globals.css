@@ -6,6 +6,9 @@
 
 * {
   font-family: "Barlow Semi Condensed", sans-serif;
+  color: white;
+  text-transform: uppercase !important;
+  letter-spacing: 2px;  
 }
 
 .gradient-circle {
@@ -19,15 +22,9 @@
 }
 
 .footer-btns {
-  text-transform: uppercase;
   border: 1px solid white;
   color: white;
   border-radius: 8px;
   padding: 8px 25px;
-  letter-spacing: 1px;
 }
 
-.sci {
-  background-image: linear-gradient(hsl(39, 89%, 49%), hsl(40, 84%, 53%));
-  border-radius: 50%;
-}

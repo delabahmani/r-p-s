@@ -1,40 +1,39 @@
 "use client";
-import Image from "next/image";
-import { use, useState } from "react";
+import { useState } from "react";
 import Header from "./components/Header";
 import Rules from "./components/Rules";
 import Play from "./components/Play";
 
 export default function Home() {
-  const [hardMode, setHardMode] = useState(false);
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(-1);
+  const [score, setScore] = useState(0);
+  const [winner, setWinner] = useState("");
 
-  function changeMode() {
-    setHardMode(!hardMode);
+  const handlePlayAgain = () => {
+    setSelected(-1);
+    if (winner === "You Win!!") setScore(score + 1);
   }
 
   return (
-    <main className="gradient-circle flex flex-col items-center justify-between p-2">
-      <Header advanced={hardMode} score={0} />
+    <main className="gradient-circle items-center p-2">
+      <Header score={score} />
 
-      <footer className="fixed bottom-7 flex w-full justify-between px-5 py-1">
-        <button onClick={changeMode} className="footer-btns">
-          {hardMode ? "Advanced" : "Normal"} Mode
-        </button>
+      <footer className="fixed bottom-7 justify-end flex w-full px-5 py-1">
 
-        <button className="footer-btns" onClick={() => setOpen(!open)}>
+        <button className="footer-btns " onClick={() => setOpen(!open)}>
           Rules
         </button>
       </footer>
       {selected >= 0 ? (
         <div>
-          <h1>Results</h1>
+          <h1>{winner}</h1>
+          <button onClick={handlePlayAgain} className="mt-4 bg-white rounded-lg text-dark">Play Again</button>
         </div>
       ) : (
-        <Play setSelected={(value) => setSelected(value)} advanced={hardMode} />
+        <Play setSelected={setSelected} setWinner={setWinner} />
       )}
-      <Rules open={open} advanced={hardMode} setOpen={() => setOpen(!open)} />
+      <Rules open={open} setOpen={() => setOpen(!open)} />
     </main>
   );
 }
